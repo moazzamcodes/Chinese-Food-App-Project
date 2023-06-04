@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Chinese Food</string>
+    <string name="imageFood">TODO</string>
+    <string name="description">Description</string>
+    <string name="price">Price</string>
+    <string name="rs">RS.</string>
+    <string name="name">Name</string>
+    <string name="name_order">Chow Min</string>
+    <string name="order_number">084634</string>
+    <string name="orderRs">Rs.</string>
+    <string name="Order_Price">500</string>
+    <string name="order_num">Order Number</string>
+    <string name="orderr">9489343</string>
+    <string name="descriptions">Some Chinese food can make you healthy and strong keep ordering and make a strong relationship with us</string>
+</resources>
