@@ -1,11 +1,15 @@
 package com.example.foodordering
 
+import android.content.Intent
+import android.graphics.BitmapFactory
+import android.media.Image
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foodordering.Adapters.MainAdapter
 import com.example.foodordering.Models.MainModels
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.sample_mainfood.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,6 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         val recyclerAdapter1 = MainAdapter(this , arrFood)
         RecyclerView_Main.adapter = recyclerAdapter1
+
 
 
     }
