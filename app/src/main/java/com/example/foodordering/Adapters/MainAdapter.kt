@@ -49,6 +49,8 @@ class MainAdapter(val context: Context ,val arrFood: java.util.ArrayList<MainMod
             intent.putExtra("price",arrFood[position].price)
             intent.putExtra("desc",arrFood[position].description)
             intent.putExtra("name",arrFood[position].name)
+
+            intent.putExtra("type",1)
             context.startActivity(intent)
         })
     }

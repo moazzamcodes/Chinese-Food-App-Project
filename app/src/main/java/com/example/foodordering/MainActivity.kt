@@ -4,6 +4,9 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.media.Image
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Switch
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foodordering.Adapters.MainAdapter
@@ -43,4 +46,22 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-}
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.Orders -> {
+                // Handle menu item 1 click
+                startActivity(Intent(this,OrderActivity::class.java))
+                true
+            }
+
+
+
+       else -> return super.onOptionsItemSelected(item)
+    }
+}}

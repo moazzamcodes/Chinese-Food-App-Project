@@ -5,12 +5,12 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import com.example.foodordering.Models.Order_Models
+import com.example.foodordering.Models.OrderModels
 
 class DBHelper (context: Context?): SQLiteOpenHelper(context, DBNAME, null, ver) {
     override fun onCreate(sqLiteDatabase: SQLiteDatabase) {
         sqLiteDatabase.execSQL(
-            "create table orders" +
+            "create table Order1" +
                     "(id integer primary key autoincrement," +
                     "name text," +
                     "phone text," +
@@ -23,7 +23,7 @@ class DBHelper (context: Context?): SQLiteOpenHelper(context, DBNAME, null, ver)
     }
 
     override fun onUpgrade(sqLiteDatabase: SQLiteDatabase, i: Int, i1: Int) {
-        sqLiteDatabase.execSQL("DROP table if exists orders")
+        sqLiteDatabase.execSQL("DROP table if exists Order1")
         onCreate(sqLiteDatabase)
     }
 
@@ -34,6 +34,7 @@ class DBHelper (context: Context?): SQLiteOpenHelper(context, DBNAME, null, ver)
         image: Int,
         desc: String,
         foodName: String,
+        quantity: Int
 
     ): Boolean {
         val database = readableDatabase
@@ -42,10 +43,11 @@ class DBHelper (context: Context?): SQLiteOpenHelper(context, DBNAME, null, ver)
         values.put("phone", phone)
         values.put("price", price)
         values.put("image", image)
-        values.put("desc", desc)
+        values.put("quantity",quantity)
+        values.put("description", desc)
         values.put("foodName", foodName)
       //  values.put("quantity", quantity)
-        val id = database.insert("orders", null, values)
+        val id = database.insert("Order1", null, values)
         return if (id <= 0) {
             false
         } else {
@@ -53,30 +55,30 @@ class DBHelper (context: Context?): SQLiteOpenHelper(context, DBNAME, null, ver)
         }
     }
 
-    val order: ArrayList<Order_Models>
+    val Order: ArrayList<OrderModels>
     get() {
-        val orders = ArrayList<Order_Models>()
+        val Order = ArrayList<OrderModels>()
         val database = this.writableDatabase
-        val cursor = database.rawQuery("Select id,foodName,image,price from orders", null)
+        val cursor = database.rawQuery("Select id,foodName,image,price from Order1", null)
         if (cursor.moveToFirst()) {
             while (cursor.moveToNext()) {
-                val model = Order_Models(imageFood = 0 , name_order = "", Order_price = "", OrderNumber = "")
+                val model = OrderModels(0,"","","")
 
                 model.OrderNumber = cursor.getInt(0).toString() + " "
                 model.name_order = cursor.getString(1)
                 model.imageFood = cursor.getInt(2)
                 model.Order_price = cursor.getInt(3).toString() + " "
-                orders.add(model)
+                Order.add(model)
             }
         }
         cursor.close()
         database.close()
-        return orders
+        return Order
     }
 
     fun getOrderById(id: Int): Cursor? {
         val database = this.writableDatabase
-        val cursor = database.rawQuery("Select * from orders where id= $id", null)
+        val cursor = database.rawQuery("Select * from Order1 where id= $id", null)
         cursor?.moveToFirst()
         return cursor
     }
@@ -100,7 +102,7 @@ class DBHelper (context: Context?): SQLiteOpenHelper(context, DBNAME, null, ver)
         values.put("desc", desc)
         values.put("foodName", foodName)
         values.put("quantity", quantity)
-        val row = database.update("orders", values, "id=$id", null).toLong()
+        val row = database.update("Order1", values, "id=$id", null).toLong()
         return if (row <= 0) {
             false
         } else {
@@ -110,11 +112,11 @@ class DBHelper (context: Context?): SQLiteOpenHelper(context, DBNAME, null, ver)
 
     fun deleteOrder(id: String): Int {
         val database = this.writableDatabase
-        return database.delete("orders", "id=$id", null)
+        return database.delete("Order1", "id=$id", null)
     }
 
     companion object {
-        val DBNAME = "food1.db"
-        val ver = 2
+        val DBNAME = "OrderApp_DB.db"
+        val ver = 4
     }
 }
